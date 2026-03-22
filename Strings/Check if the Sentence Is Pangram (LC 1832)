@@ -1,0 +1,31 @@
+// Problem: Check if the Sentence Is Pangram
+// Link: https://leetcode.com/problems/check-if-the-sentence-is-pangram/
+
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+
+    // Approach 1: Boolean Array
+    // Time: O(n), Space: O(1)
+
+        if (sentence.length() < 26) return false;
+        boolean[] seen = new boolean[26];
+        for (int i = 0; i < sentence.length(); i++) {
+            char ch = sentence.charAt(i);
+            seen[ch - 'a'] = true;
+        }
+        for (boolean val : seen) {
+            if (!val) return false;
+        }
+        return true;
+    }
+
+    // Approach 2: Bitmask
+    // Time: O(n), Space: O(1)
+
+        int mask = 0;
+        for (char ch : sentence.toCharArray()) {
+            mask |= (1 << (ch - 'a'));
+        }
+        return mask == (1 << 26) - 1;
+    }
+}
