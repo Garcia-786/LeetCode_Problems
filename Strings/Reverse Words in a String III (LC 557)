@@ -1,0 +1,41 @@
+// Problem: Reverse Words in a String III 
+// Link: https://leetcode.com/problems/reverse-words-in-a-string-iii/
+
+class Solution {
+
+    // Approach 1: In-place (char array)
+    // Time: O(n), Space: O(1)
+    public String reverseWordsInPlace(String s) {
+        char[] charr = s.toCharArray();
+        int strt = 0;
+
+        for (int i = 0; i <= charr.length; i++) {
+            if (i == charr.length || charr[i] == ' ') {
+                int l = strt, r = i - 1;
+                while (l < r) {
+                    char temp = charr[l];
+                    charr[l] = charr[r];
+                    charr[r] = temp;
+                    l++;
+                    r--;
+                }
+                strt = i + 1;
+            }
+        }
+        return new String(charr);
+    }
+
+    // Approach 2: Using split + StringBuilder
+    // Time: O(n), Space: O(n)
+    public String reverseWords(String s) {
+        String[] words = s.split(" ");
+        StringBuilder str = new StringBuilder();
+
+        for (String i : words) {
+            StringBuilder rev = new StringBuilder(i);
+            str.append(rev.reverse()).append(" ");
+        }
+
+        return str.toString().trim();
+    }
+}
